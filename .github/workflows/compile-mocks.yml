@@ -30,7 +30,6 @@ jobs:
           working_directory: ${{ matrix.dir }}
           root_file: main.tex
           args: -pdf -interaction=nonstopmode -halt-on-error
-          extra_packages: enumitem psnfss helvetic mathptmx rsfs
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.name }}
