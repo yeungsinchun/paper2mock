@@ -16,8 +16,9 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
+\usepackage[T1]{fontenc}  % Required for helvet/Helvetica shapes to resolve under LuaLaTeX
 \usepackage{helvet}
-\usepackage{mathptmx}  % Times New Roman for text and math
+\renewcommand{\familydefault}{\sfdefault}  % Helvetica (sans-serif) throughout, text and math
 \usepackage{atbegshi}
 
 % ---- Centralised customisation settings ----
