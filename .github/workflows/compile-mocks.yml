@@ -1,0 +1,36 @@
+# Compile-check for the fully-tracked mocks (9 and 10).
+# Builds each question paper and marking scheme with latexmk and uploads
+# the PDFs as run artifacts. Nothing is committed back: artifacts live on
+# the Actions run (expiring storage), so git history stays .tex-only.
+name: compile-mocks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - dir: first-test/9/question-paper
+            name: mock9-question-paper
+          - dir: first-test/9/marking-scheme
+            name: mock9-marking-scheme
+          - dir: first-test/10/question-paper
+            name: mock10-question-paper
+          - dir: first-test/10/marking-scheme
+            name: mock10-marking-scheme
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: ${{ matrix.dir }}
+          root_file: main.tex
+          args: -pdf -interaction=nonstopmode -halt-on-error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: ${{ matrix.dir }}/main.pdf
