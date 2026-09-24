@@ -1,7 +1,7 @@
 # Compile-check for every tracked mock (Sets 1-10).
 # Builds each question paper and marking scheme with latexmk.
 # PDFs are never committed: PRs get per-document artifacts, and merges to
-# main attach question-papers.zip + marking-schemes.zip to a `latest` release.
+# main attach question-papers.zip + marking-schemes.zip to a commit-specific release.
 name: compile-mocks
 
 on:
@@ -69,9 +69,9 @@ jobs:
       - run: |
           cd qp && zip ../question-papers.zip mock*-question-paper.pdf && cd ..
           cd ms && zip ../marking-schemes.zip mock*-marking-scheme.pdf && cd ..
-      - uses: ncipollo/release-action@v1
+      - uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd
         with:
-          tag: latest
+          tag: build-${{ github.sha }}
           allowUpdates: true
           replacesArtifacts: true
           artifacts: question-papers.zip,marking-schemes.zip
