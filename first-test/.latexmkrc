@@ -1,3 +1,3 @@
-# Use pdfLaTeX so mathptmx and helvet retain the expected font metrics.
-# LuaLaTeX and XeLaTeX use different font handling and may change the layout.
-$pdf_mode = 1;
+# Build with LuaLaTeX (pdf_mode 4). mathptmx and helvet still load as
+# legacy fonts; do not switch to XeLaTeX without checking the layout.
+$pdf_mode = 4;
